@@ -12,7 +12,14 @@ This is a *starter for an evolving creative development environment*. The local 
 
 The first user is comfortable with a repository, Git, and a coding agent such as Codex or Claude Code. They might be a technical founder, engineer, consultant, developer advocate, or small technical marketing team. They regularly need diagrams, figures, product briefs, slide graphics, explainers, and polished documents, and they want those pieces to share a recognizable visual language.
 
-The starter does not need to promise a general canvas editor. Its value is that the user can say what a piece needs to communicate, see an actual preview, give visual feedback, and retain editable source. A small number of direct controls, such as selecting a brand, choosing an export size, or editing copy, can make that workflow smoother without displacing the agent.
+The studio uses agent-authored layouts with focused controls; a general canvas editor is outside the product direction. The user says what a piece needs to communicate, sees an actual preview, gives visual feedback, and retains editable source. Controls such as selecting a brand variation, choosing an export size, or editing declared content support that workflow. Layouts are authored in code, with structured metadata and references, companion Markdown for narrative content, and injected brand tokens. See the [source-model decision](docs/adr/0006-code-authored-compositions.md).
+
+Efficient agent navigation and clear authoring rules are core product requirements.
+The workspace must make relevant brand guidance, approved examples, reusable parts,
+and prior feedback easy to find without reading everything. The studio reinforces
+checkable contracts through useful diagnostics, while agents and owners review
+visual quality in actual previews and exports. See the
+[agent authoring support decision](docs/adr/0008-agent-authoring-support.md).
 
 ## The operating loop
 
@@ -83,7 +90,8 @@ A useful first release is a repository someone can fork, install, run, and use t
 - Clear contracts for a brand, project, brief, artifact, component, and template; simple files and metadata are sufficient.
 - Root agent guidance plus a handful of demonstrated skills: brief a piece, search before building, preview and inspect, export, and promote proven work to a reusable part.
 - A setup path that creates the first brand and project from a few choices and optionally accepts a logo, example, or existing guide. Starting with the neutral theme must remain possible.
-- HTML and PNG export for the common case; PDF and native SVG only where the rendering path can deliver them reliably. The available formats should be stated per artifact.
+- Portable HTML export is a priority for the first working slice, alongside PNG and capability-dependent PDF and native SVG. Initial deliverables are static. HTML delivery must work independently of the studio; single-file versus bundled packaging remains to be exercised. The available formats should be stated per artifact.
+- Complete rendered slides plus direct, independent export of their used figures, assets, and visual subcomponents, including nested parts. A slide may serve as an ideation reference while its parts are assembled in another tool. Native editable presentation export is deferred to the [roadmap](docs/roadmap.md).
 
 The minimum app is a preview and library browser, not the sole way to author. The first agent handoff can be a saved brief with a **Copy agent request** action. Integration that launches a coding agent from the browser can come later if a particular environment supports it reliably.
 
@@ -92,6 +100,7 @@ Likewise, user interface editing of document copy, visual dependency graphs, gen
 ## Design rules for reusable work
 
 - **Search before creating.** The agent should inspect relevant examples and parts, then either reuse one, adapt it locally, or explain why a new part is warranted.
+- **Preserve established work.** Drafts allow direct revision. An owner can take an item out of draft, and using it in another composition automatically protects the included item while the parent can remain a draft. Later changes create a named derivative by cloning or extending the original; existing uses retain their references. Injected brand values continue to update across originals and derivatives.
 - **Promote after evidence.** A one-off artifact is allowed to be specific. Extract a shared component when a second use exposes the stable interface, or when the user expressly wants one.
 - **Keep content and composition separable where helpful.** Repeated documents benefit from named content fields or Markdown and a stable layout. Novel figures can remain ordinary source code.
 - **Show the contract through examples.** A reusable component has a clear purpose, props, one or two examples, and a preview. A template shows what changes between instances.

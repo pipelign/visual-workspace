@@ -55,11 +55,60 @@ Stabilize fonts, assets, dimensions, and time-dependent inputs before relying on
 image comparisons. Review any changed baseline. A successful command alone does
 not prove that an export is readable or correctly laid out.
 
+For brand rendering changes, exercise token updates through nested visual parts,
+side-by-side variation isolation, and missing-token diagnostics. Adding a variation
+must expose existing artifacts without copying their source. Check preview and
+export with the same variation, including typography changes and fixed assets.
+
+For lifecycle changes, exercise direct draft editing, explicit protection,
+protection on composition use, and derivation without changing existing consumers.
+Include owned Markdown and nested visual dependencies in preservation checks,
+while verifying that injected brand changes still reach protected artifacts.
+Verify that discovery-only metadata edits preserve identity and existing renders
+without a derivative, while metadata used directly in rendering stays protected.
+
+For ownership and discovery changes, exercise locally identified configured uses
+under their owner, repeated uses with different inputs, and promotion without
+altering the original. Verify that draft-owned configuration can change without
+mutating a protected component, and that a protected figure's local parts cannot
+be changed through a draft parent. Check lookup and export by owner-qualified ID.
+For collection changes, exercise overlapping membership across projects. Adding
+or removing a membership must preserve item identity, owning scope, source, and
+lifecycle; actual composition use still triggers protection.
+
+For composition and part-export changes, inspect both the complete slide and
+independent exports of its used figures, assets, and nested visual subcomponents.
+Exercise repeated component uses with different inputs, brand variations, inherited
+styles, fonts, bounds, and transparency. Check that exporting a part preserves its
+source lifecycle and excludes unrelated neighbors. Verify destination import before
+claiming that a handoff workflow works in an external presentation tool.
+
+For adaptation behavior, use a wide composition and a derivative for a narrow
+destination. Check that the original and its consumers remain intact, expected
+content and relationships are retained according to the brief, and local origins
+are traceable. Inspect both layouts and their part exports at intended dimensions
+with representative brand variations; source reuse alone does not prove legibility.
+
 For studio UI changes, check keyboard access, visible focus, understandable
 labels, loading and failure states, and representative viewport sizes. Apply
 brand and destination requirements to the artifact itself. Record the source
 revision, dimensions, selected brand, format, and relevant renderer settings for
 exports; dirty source needs an explicit record rather than a clean-commit claim.
+
+For portable HTML changes, inspect a copied export independently of the studio
+and workspace, checking fonts, assets, styles, saved content, and resolved brand
+values. Exercise the proposed offline/local-file opening contract before claiming
+that it works; a successful in-app preview or hosted build is insufficient.
+
+For agent discovery and validation changes, exercise compact lookup, inspection
+of applicable guidance and approved examples, and traversal to configured parts.
+Check useful error reports through the public interface. Use a representative
+agent authoring task to assess whether relevant reuse was found without reading
+the whole workspace; deterministic contract tests do not establish visual quality
+or efficient agent behavior by themselves. For enforcement changes, verify that
+structural violations block the affected operation, advisory visual findings
+allow export, and failed applicable mandatory owner rules block export. Preserve
+draft inspection and useful diagnostics when a complete render cannot be produced.
 
 ## Completion and CI
 

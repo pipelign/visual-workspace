@@ -475,8 +475,10 @@ behavior remain unselected; edits must target authoritative source data and obey
 the same protection and derivation rules as agent edits.
 
 This points toward a browser-based rendering environment with filesystem-backed
-source and a discovery interface usable by both the gallery and agents. Runtime,
-framework, bundler, content parser, export tools, and distribution remain open.
+source and a discovery interface usable by both the gallery and agents. The
+[development foundation](development.md) establishes an evaluated toolchain and
+neutral rendering lab. Content bindings, public authoring/export interfaces, and
+distribution still need to be resolved through the first product slice.
 
 ## Decisions to resolve next
 

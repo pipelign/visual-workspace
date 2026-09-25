@@ -40,12 +40,14 @@ proposals as proposals until a decision is made.
 2. Search for relevant components, templates, examples, skills, and commands.
    Reuse or adapt what fits before adding another abstraction or dependency.
 3. Deliver a small end-to-end slice. Keep domain logic behind a small interface
-   and keep environment effects at the edges. Add regression coverage for
-   meaningful behavior, using the engineering guide.
+   and keep environment effects at the edges. Add tests when they protect
+   meaningful behavior or a concrete regression; routine scripts need no test suite.
 4. Inspect the real result. For visuals, render at the destination dimensions;
    for export changes, inspect the exported file as well as the preview.
-5. Review both correctness against the request and maintainability. Run the
-   applicable checks, then report the result, checks run, and remaining limits.
+5. Review correctness against the request and maintainability. Substantive code
+   changes also require independent spec and standards reviews under the
+   [review policy](docs/engineering.md#review-and-compatibility-policy). Run the
+   applicable checks, resolve review findings, and report results and limits.
 
 ## Owner material and reuse
 
@@ -84,8 +86,16 @@ One root context, with decisions recorded when needed. Read
 
 ## Current verification
 
-This is a documentation and agent-setup bootstrap; no application toolchain has
-been selected. Run `python3 scripts/check_agent_setup.py` and `git diff --check`.
-When executable studio code is introduced, add documented install, development,
-test, type-check, lint, and build commands with CI in that same change. Never
-report a preview, export, or test as verified unless it was actually exercised.
+The executable quality lab establishes the development toolchain; the product
+studio remains to be built. Follow [setup and commands](docs/development.md) and
+[testing and evidence requirements](docs/testing.md). Select the smallest useful
+local checks for the change. CI owns the full `pnpm check` gate; a full local run
+needs a concrete reason, not a routine end-of-task habit. Once relevant checks
+pass, stop unless new changes or failures invalidate that evidence. Use
+`pnpm check:env` for environment setup or troubleshooting, not after every edit.
+Documentation normally needs diff/link review, not application tests.
+
+Extend the gate with each product capability. Inspect changed visual output and
+actual exports; review baseline changes explicitly. Do not weaken checks to make
+a change pass. Report exactly what ran, what was inspected, and any unverified
+platform or destination.

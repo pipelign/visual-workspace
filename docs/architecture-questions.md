@@ -185,10 +185,11 @@ Proposed exercises within that example:
   and the resulting repair guidance. Evaluate both the delivered visual and the
   efficiency of finding and following the owner's existing system.
 
-Choose an initial runtime, framework, bundler, Markdown tooling, export tooling,
-and package manager against these requirements, then test the choice through the
-agreed example before treating the stack as established. The first executable
-slice must include the installation and quality checks required by
-[the engineering guide](engineering.md). Exact caching strategies, search ranking,
+The [development foundation](development.md) now supplies the initial toolchain,
+rendering probes, installation, and quality checks. Reuse it for the first slice
+and validate the remaining Markdown, public-contract, lifecycle, and export
+questions through the agreed example. The lab alone does not establish those
+product capabilities. Follow [the engineering guide](engineering.md) as each
+capability is introduced. Exact caching strategies, search ranking,
 and package extraction can follow observed needs; working IDs, lifecycle rules,
 and owner/studio interfaces must exist in the initial slice.

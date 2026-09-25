@@ -141,3 +141,9 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Development-quality evaluation outputs
+artifacts/
+tools/quality-lab/public/
+test-results/
+playwright-report/

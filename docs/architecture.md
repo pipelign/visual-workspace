@@ -86,8 +86,10 @@ and indexes remain implementation choices. See
 Layouts are authored in code. Structured metadata and references describe named
 parts, identity, meaningful relationships, dependencies, and export capabilities.
 Companion Markdown supplies editable narrative content, and semantic brand tokens
-are injected during rendering. Exact file formats, implementation language,
-framework, and Markdown binding syntax remain open.
+are injected during rendering. Exact file formats and Markdown binding syntax
+remain open. The [development foundation](development.md) evaluates
+TypeScript/React/Vite for the first slice; its neutral lab does not establish the
+public composition contract.
 
 For a document, the agent creates companion Markdown with clear page boundaries
 and ordinary Markdown formatting, including headings, lists, and preformatted

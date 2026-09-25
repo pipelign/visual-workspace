@@ -69,15 +69,28 @@ existing authorization and accepted decisions when applying an upstream workflow
   not been run. Reconfigure them when the owner's workflow changes.
 - Test interfaces and acceptance criteria already agreed for the task remain
   agreed. Resolve new ambiguity instead of restarting an approval loop.
+- Apply [selective verification](../testing.md#select-local-checks) even when an
+  upstream workflow suggests an automatic full-suite run or test-first treatment
+  for every edit. Add coverage for meaningful behavior, omit routine script
+  suites, and leave broad verification to CI unless a concrete concern warrants
+  a wider local run. Reviewers reuse evidence instead of repeating checks.
 - Some upstream workflows finish by committing, publishing, branching, or
   operating a tracker. Perform those actions only within the user's authorized
   scope. A request to install the skills does not invoke their workflows.
+- Deterministic repository automation uses Node. When generating a project
+  script from an upstream workflow, use the project runtime and portable Node
+  APIs. Vendored human-interaction Bash templates remain an unchanged upstream
+  reference; they are not required by the project checks or CI.
 - Use the host's available delegation and skill mechanisms. If a workflow calls
   for independent reviewers and those tools are unavailable, disclose that limit;
   a sequential self-review is not an independent review.
 - The upstream `code-review` compares committed revisions. For uncommitted work,
   explicitly include staged, unstaged, and new files in the review scope. An
-  empty commit diff does not mean the working tree has been reviewed.
+  empty commit diff does not mean the working tree has been reviewed. For an
+  ongoing task, use its recorded starting commit as the review base. Ask for a
+  base only when the intended scope cannot be recovered from task context.
+  Substantive code changes require this independent review under the owner's
+  [engineering policy](../engineering.md#review-and-compatibility-policy).
 
 ## Extending and updating
 
@@ -98,7 +111,7 @@ To update Matt's snapshot:
 4. Update the lock manifest's revision, fetch date, source paths, and per-file
    SHA-256 hashes from that upstream checkout, not from unexplained local edits.
    Update this guide's revision and selection.
-5. Run `python3 scripts/check_agent_setup.py`, review the full diff, and confirm
+5. Run `node scripts/check-agent-setup.ts` (or `pnpm check:agents`), review the full diff, and confirm
    discovery in the agent hosts used by the project.
 
 There is no automatic update step or dependency on a global installer. The

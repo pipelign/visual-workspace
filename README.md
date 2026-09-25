@@ -3,9 +3,9 @@
 A forkable visual workspace for coding agents. Build diagrams, figures, and
 documents in code, then grow a reusable visual system and authoring practice.
 
-This repository is at the project and agent-setup stage. There is no runnable
-studio yet. The [project charter](Project-Charter.md) describes the intended
-authoring loop; [architecture notes](docs/architecture.md) distinguish the studio,
+This repository has a runnable development quality lab and contribution tooling.
+The product studio remains to be built. The [project charter](Project-Charter.md)
+describes the intended authoring loop; [architecture notes](docs/architecture.md) distinguish the studio,
 owner workspace, and starter, including the open app/library packaging question.
 
 ## Working with an agent
@@ -26,15 +26,27 @@ Owner work will include requests such as “Create a figure for this project's
 brief using this brand.” Those authoring capabilities still need to be built and
 demonstrated. The included skills support engineering the system.
 
-## Check this setup
+## Run the development lab
 
-With Python 3.10 or newer:
+Follow [development setup](docs/development.md) for the pinned Node/pnpm versions
+and browser prerequisites on Linux/WSL, native Windows, or macOS. Deterministic
+repository tooling runs on Node; no Python installation is required.
+
+After installation:
 
 ```sh
-python3 scripts/check_agent_setup.py
-git diff --check
+pnpm check:env
+pnpm dev
 ```
 
-CI runs the setup check. Application installation, preview, export, and validation
-commands will arrive with the first executable slice, following the
-[engineering guide](docs/engineering.md).
+The neutral lab exercises React/Tailwind previews, portable HTML, and browser
+export checks. CI runs the full `pnpm check` gate on all three operating systems.
+For local changes, select affected checks using the
+[testing policy](docs/testing.md#select-local-checks); a full local run is optional
+and should answer a concrete concern.
+
+Read the [engineering standards](docs/engineering.md),
+[testing/evidence policy](docs/testing.md), and the linked
+[stack evaluations](docs/development.md#why-this-stack) before implementing a
+product capability. The lab is an evaluation fixture, not the public authoring
+contract.

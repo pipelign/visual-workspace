@@ -28,27 +28,33 @@ does not rewrite owner files. CI enables symlink support before checkout.
 
 ## Install and run
 
-Install the pinned Node version with your normal OS installer/version manager,
-then use the package-manager version declared in the repository. At this revision:
+Install the pinned Node version with your normal OS installer/version manager.
+Node 24.19.0 includes npm 11.17.0; `package.json` records the tested npm version and
+`devEngines` checks it before installation or script execution. At this revision,
+use Node 24.19.0 and npm 11.17.0. If your npm version differs, install that version
+with `npm install --global npm@11.17.0`. See the
+[Node release record](https://nodejs.org/en/blog/release/v24.19.0).
 
 ```sh
-npm install --global pnpm@12.6.0
-pnpm install --frozen-lockfile
-pnpm exec playwright install chromium
-pnpm check:env
-pnpm dev
+npm ci
+npm exec -- playwright install chromium
+npm run check:env
+npm run dev
 ```
 
 On Linux/WSL, Chromium also needs system libraries. Use
-`pnpm exec playwright install --with-deps chromium` when those libraries are
+`npm exec -- playwright install --with-deps chromium` when those libraries are
 absent; the system-package step can require administrator privileges.
-`pnpm check:env` checks Node, the skill adapters, and actual Chromium startup.
-It has a distinct name because `pnpm doctor` invokes pnpm's own built-in check.
+`npm run check:env` checks Node, the skill adapters, and actual Chromium startup.
+
+When updating a checkout that previously used pnpm, run `npm ci` once. It
+replaces the old dependency tree using `package-lock.json`; there is no need to
+uninstall a globally installed package manager.
 
 The lab runs on the loopback address printed by Vite. It generates neutral
 artifact documents before starting, and displays them in separate frames. Changes
 to the interactive shell refresh through Vite. After changing the Node-rendered
-fixture, rerun `pnpm probe:render` and refresh the frame, or restart `pnpm dev`.
+fixture, rerun `npm run probe:render` and refresh the frame, or restart `npm run dev`.
 A production authoring watcher is still first-slice work.
 
 ## Commands and outputs
@@ -58,23 +64,23 @@ The availability of a full gate does not make it a required local finishing step
 
 | Command | Result |
 | --- | --- |
-| `pnpm check` | Full CI gate: skill check, types, lint, formatting, Vitest, production build, Chromium, and Linux visual comparisons. Run locally only for a concrete broader verification need. |
-| `pnpm typecheck`, `pnpm lint`, `pnpm format:check` | Independent static gates; diagnostics identify their files and rules. |
-| `pnpm test` / `pnpm test:watch` | Node behavior tests, once or in watch mode; pass an affected file or test-name filter for local work. |
-| `pnpm test:browser` | Real Chromium behavior, accessibility, offline delivery, resource readiness, and export geometry. |
-| `pnpm test:visual` | Reviewed Linux reference images, with updates disabled. |
-| `pnpm test:report` | Opens the browser HTML report. Visual reports are separate under `artifacts/visual/report`. |
-| `pnpm test:coverage` | Diagnostic coverage report; a percentage is not the acceptance gate. |
-| `pnpm build` | Production Vite lab plus generated static artifacts in `dist/quality-lab`. |
-| `pnpm preview` | Builds and serves that production output locally; browser suites use this path. |
-| `pnpm probe:render` | Regenerates the portable HTML fixtures through the actual Node/TSX rendering entry point. |
-| `pnpm check:agents` | Verifies the pinned skill snapshot, license, metadata, adapters, and guidance using Node built-ins. |
-| `pnpm format` | Explicitly formats maintained code/configuration. It excludes vendored skills, generated output, and prose. |
+| `npm run check` | Full CI gate: skill check, types, lint, formatting, Vitest, production build, Chromium, and Linux visual comparisons. Run locally only for a concrete broader verification need. |
+| `npm run typecheck`, `npm run lint`, `npm run format:check` | Independent static gates; diagnostics identify their files and rules. |
+| `npm test` / `npm run test:watch` | Node behavior tests, once or in watch mode; pass arguments after `--`, for example `npm test -- tools/quality-lab/render.test.ts`. |
+| `npm run test:browser` | Real Chromium behavior, accessibility, offline delivery, resource readiness, and export geometry. |
+| `npm run test:visual` | Reviewed Linux reference images, with updates disabled. |
+| `npm run test:report` | Opens the browser HTML report. Visual reports are separate under `artifacts/visual/report`. |
+| `npm run test:coverage` | Diagnostic coverage report; a percentage is not the acceptance gate. |
+| `npm run build` | Production Vite lab plus generated static artifacts in `dist/quality-lab`. |
+| `npm run preview` | Builds and serves that production output locally; browser suites use this path. |
+| `npm run probe:render` | Regenerates the portable HTML fixtures through the actual Node/TSX rendering entry point. |
+| `npm run check:agents` | Verifies the pinned skill snapshot, license, metadata, adapters, and guidance using Node built-ins. |
+| `npm run format` | Explicitly formats maintained code/configuration. It excludes vendored skills, generated output, and prose. |
 
 A focused browser investigation can use
-`pnpm exec playwright test --project=chromium --grep "offline"`.
-Firefox/WebKit checks are available with `pnpm test:cross-browser` after
-`pnpm exec playwright install firefox webkit`; Linux may also need their system
+`npm exec -- playwright test --project=chromium --grep "offline"`.
+Firefox/WebKit checks are available with `npm run test:cross-browser` after
+`npm exec -- playwright install firefox webkit`; Linux may also need their system
 dependencies. These extra browser engines are not installed by the basic setup
 and are not part of the initial verified baseline.
 
@@ -92,18 +98,23 @@ Source image baselines live with the visual tests and receive deliberate review.
   supports TypeScript below 6.1; the registry's newer 7.x release did not fit that
   peer contract. Recheck the actual peers on upgrades rather than treating this
   as a permanent preference for an older compiler.
-- pnpm configuration lives in its workspace settings file. `verifyDepsBeforeRun:
-  error` prevents check commands from silently installing packages; `pmOnFail:
-  error` rejects a different package manager. Dependency build scripts are
-  individually allowed. The current graph requires esbuild's binary installation.
-  The exact Vite release-age exception records the evaluated pin; strict mode
-  prevents future silent additions. Inspect that policy with lockfile changes.
+- npm settings live in `.npmrc`: exact dependency saves, strict engine and peer
+  checks, and a one-day release-age window when resolving versions. Vite is
+  exempt from that window for the evaluated exact pin; npm's exception matches
+  the package name, so review it on upgrades. `package.json#allowScripts` permits
+  esbuild's installation script and explicitly skips the optional macOS
+  fsevents build, as in the earlier esbuild-only policy. Strict script approval
+  rejects unreviewed dependency scripts. Review these settings with lockfile changes.
+- `npm ci` installs the committed lockfile without rewriting it and rejects a
+  mismatch with `package.json`. Use `npm install` when deliberately changing
+  dependencies and commit the resulting lockfile. `npm run` executes installed
+  tools without an implicit installation; use `--` to forward script options.
 - Tasks invoke Node CLI entry points with argument arrays. They do not require
   Bash, POSIX environment assignment, or launching Windows `.cmd` files from
   Node. File tests include spaces, Unicode, `#`, and `%` in real local paths.
 - The root TypeScript configuration describes the bundled/TSX-loaded lab.
   `scripts/tsconfig.json` checks native Node TypeScript with NodeNext resolution
-  and erasable syntax; `pnpm typecheck` checks both. The checker executes directly
+  and erasable syntax; `npm run typecheck` checks both. The checker executes directly
   on the pinned Node without a loader or build. For a checker change, invoke its
   command directly when a smoke check is useful. Node strips types without
   checking them, so CI retains the separate static gate. See
@@ -126,7 +137,7 @@ and browser export. The [quality-tool comparison](research/quality-tooling-evalu
 examines test runners, typed ESLint/Prettier versus Biome, accessibility,
 reproducibility, and CI evidence.
 
-The installed baseline is Node LTS + pnpm + TypeScript/React/Vite/Tailwind, typed
+The installed baseline is Node LTS + npm + TypeScript/React/Vite/Tailwind, typed
 ESLint/Prettier, Vitest, Playwright, and axe. Playwright also supplies the browser
 used by the export probes, avoiding another browser automation family.
 unified/remark and Zod are recommendations for later content/contract work, not

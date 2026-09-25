@@ -261,7 +261,7 @@ is normally sufficient. The [testing policy](testing.md#select-local-checks)
 defines when to broaden that selection and when to stop. State what ran and what
 is left to CI; a local full-suite run is not required to finish an ordinary change.
 
-CI runs `pnpm check`: skill integrity, types, lint, formatting, Node tests, build,
+CI runs `npm run check`: skill integrity, types, lint, formatting, Node tests, build,
 Chromium checks, and Linux visual comparisons. Keep that full gate available for
 cross-cutting changes, reproducing broad CI failures, or an explicit request.
 Documentation normally needs diff/whitespace and affected-link review. Run the

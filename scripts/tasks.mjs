@@ -58,14 +58,14 @@ switch (task) {
     const { chromium } = await import('@playwright/test');
     if (!existsSync(chromium.executablePath()))
       throw new Error(
-        'Install the pinned browser with pnpm exec playwright install chromium.',
+        'Install the pinned browser with npm exec -- playwright install chromium.',
       );
     try {
       const browser = await chromium.launch();
       await browser.close();
     } catch (cause) {
       throw new Error(
-        'Chromium could not start. On Linux/WSL, run pnpm exec playwright install --with-deps chromium. See docs/development.md for platform prerequisites.',
+        'Chromium could not start. On Linux/WSL, run npm exec -- playwright install --with-deps chromium. See docs/development.md for platform prerequisites.',
         { cause },
       );
     }

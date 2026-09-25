@@ -113,6 +113,46 @@ This follow-up checked the edited Vitest configuration, test-file discovery,
 documentation links, and whitespace. No tests were executed. Independent standards
 and spec reviews found no material issues and did not repeat checks.
 
+## npm follow-up
+
+The owner chose npm for familiarity and simpler onboarding. This migration starts
+from commit `97065e41c4850ce766804c218e6809f05851198b`. Acceptance: npm owns
+installation, the sole dependency lockfile, task examples, diagnostics, and CI;
+existing pins, portable commands, installation policies, and selective testing
+remain intact. Earlier pnpm commands above record historical verification.
+
+The setup uses npm 11.17.0 supplied with the pinned Node version, with a
+`devEngines` check. `package-lock.json` replaces the pnpm lockfile and workspace
+configuration. npm requires an explicit denial for the optional macOS fsevents
+build to retain the esbuild-only script policy; the first lockfile generation
+correctly rejected that unreviewed entry. The Vite release-age exception now
+matches its package name rather than a specific version and remains subject to
+review with the exact dependency pin.
+
+Generated the lockfile in an empty temporary directory, retaining native optional
+packages for all supported platforms. All resolved package/version pairs already
+appeared in the previous pnpm lockfile; no dependency upgrades were introduced.
+Migration verification on Linux/WSL with Node 24.19.0 and npm 11.17.0:
+
+- `npm ci` installed 212 packages and left the lockfile byte-for-byte unchanged.
+  The command used the temporary npm cache and disabled automatic audit/funding
+  output; neither is a repository setting.
+- `npm run typecheck` passed for both TypeScript configurations.
+- `npm run build` passed, exercising Node/TSX rendering and Vite/native tooling.
+- `npm run check:env` passed the skill checker and a real Chromium launch with
+  the existing temporary browser/library paths documented above.
+- Focused Prettier checks on `package.json`, `scripts/tasks.mjs`, and the quality
+  workflow, plus ESLint on the task wrapper, passed.
+- Diff/whitespace, changed-document local links, and active command-reference
+  review passed. Direct pins match the previous manifest; every dependency entry
+  in the new lockfile has a public registry URL and integrity hash.
+
+No tests or full-suite gate were run; remote Windows/macOS and full CI results
+remain pending. Independent spec review: zero material findings. Independent
+standards review: zero material findings. Both reviewers inspected tracked and
+new files against the migration base and reused this evidence without rerunning
+checks. The migration is ready for the owner to commit and push.
+
 ## Remaining limits
 
 Native Windows/macOS and remote CI have not run in this session. Firefox/WebKit

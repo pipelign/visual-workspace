@@ -111,7 +111,7 @@ To update Matt's snapshot:
 4. Update the lock manifest's revision, fetch date, source paths, and per-file
    SHA-256 hashes from that upstream checkout, not from unexplained local edits.
    Update this guide's revision and selection.
-5. Run `node scripts/check-agent-setup.ts` (or `pnpm check:agents`), review the full diff, and confirm
+5. Run `node scripts/check-agent-setup.ts` (or `npm run check:agents`), review the full diff, and confirm
    discovery in the agent hosts used by the project.
 
 There is no automatic update step or dependency on a global installer. The

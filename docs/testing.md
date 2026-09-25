@@ -42,9 +42,9 @@ suite; agents do not routinely duplicate it locally.
   failures; handing broad coverage to CI does not mean ignoring known failures.
 
 For example, a renderer change can use
-`pnpm exec vitest run tools/quality-lab/render.test.ts`; a browser behavior can
+`npm exec -- vitest run tools/quality-lab/render.test.ts`; a browser behavior can
 use a relevant file or test-name filter. A documentation edit needs neither.
-`pnpm check` remains the complete CI gate, available locally when justified.
+`npm run check` remains the complete CI gate, available locally when justified.
 
 ## Choose evidence for the affected behavior
 
@@ -158,7 +158,7 @@ A missing or changed baseline fails. To intentionally propose a new baseline on
 the reference platform:
 
 ```sh
-pnpm test:visual --update-snapshots
+npm run test:visual -- --update-snapshots
 ```
 
 Inspect every changed expected image, explain the visual reason, retain the

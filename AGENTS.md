@@ -89,10 +89,10 @@ One root context, with decisions recorded when needed. Read
 The executable quality lab establishes the development toolchain; the product
 studio remains to be built. Follow [setup and commands](docs/development.md) and
 [testing and evidence requirements](docs/testing.md). Select the smallest useful
-local checks for the change. CI owns the full `pnpm check` gate; a full local run
+local checks for the change. CI owns the full `npm run check` gate; a full local run
 needs a concrete reason, not a routine end-of-task habit. Once relevant checks
 pass, stop unless new changes or failures invalidate that evidence. Use
-`pnpm check:env` for environment setup or troubleshooting, not after every edit.
+`npm run check:env` for environment setup or troubleshooting, not after every edit.
 Documentation normally needs diff/link review, not application tests.
 
 Extend the gate with each product capability. Inspect changed visual output and

@@ -8,6 +8,6 @@ dist/
 artifacts/
 coverage/
 tools/quality-lab/public/
-pnpm-lock.yaml
+package-lock.json
 # Prose follows the repository writing guidance; keep code formatting separate.
 **/*.md

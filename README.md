@@ -28,19 +28,19 @@ demonstrated. The included skills support engineering the system.
 
 ## Run the development lab
 
-Follow [development setup](docs/development.md) for the pinned Node/pnpm versions
+Follow [development setup](docs/development.md) for the pinned Node/npm versions
 and browser prerequisites on Linux/WSL, native Windows, or macOS. Deterministic
 repository tooling runs on Node; no Python installation is required.
 
 After installation:
 
 ```sh
-pnpm check:env
-pnpm dev
+npm run check:env
+npm run dev
 ```
 
 The neutral lab exercises React/Tailwind previews, portable HTML, and browser
-export checks. CI runs the full `pnpm check` gate on all three operating systems.
+export checks. CI runs the full `npm run check` gate on all three operating systems.
 For local changes, select affected checks using the
 [testing policy](docs/testing.md#select-local-checks); a full local run is optional
 and should answer a concrete concern.

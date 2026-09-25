@@ -14,7 +14,7 @@ Subsequent implementation and actual results are recorded in
 
 ## Recommendation and scope
 
-For the current React/HTML/SVG direction, start with **Node LTS and pnpm,
+For the current React/HTML/SVG direction, start with **Node LTS and npm,
 TypeScript, typed ESLint plus Prettier, Vitest in Node, and Playwright Test**.
 Add `@axe-core/playwright` to the browser suite. This is one proposed setup, not
 an accepted stack decision. React, Tailwind CSS, and shadcn/ui remain candidates;
@@ -254,44 +254,38 @@ fields that callers rely on, avoiding snapshots of entire internal error objects
 
 Node 24 is an LTS line in the inspected release table. Prefer a supported LTS
 version, pinned to an exact tested patch, rather than an unbounded `latest`.
-Pin the pnpm version in `packageManager`, commit its lockfile, and use an explicit
-`pnpm install --frozen-lockfile` in verification. The flag rejects missing or
-out-of-date lockfiles. Exact release numbers for all tools should be recorded
-together after the first installation/build/browser proof.
+The initial evaluation used pnpm. The owner subsequently chose npm for a more
+familiar setup with fewer prerequisites. Both managers support committed
+lockfiles and frozen installation; npm meets the current single-package needs.
+The current setup uses the npm version recorded in `package.json`, checks it
+with `devEngines`, and commits `package-lock.json`. `npm ci` rejects a mismatch
+with the manifest and installs without rewriting the lockfile.
 [Node releases](https://nodejs.org/en/about/previous-releases),
-[pnpm installation/version pin](https://pnpm.io/installation),
-[frozen installation](https://pnpm.io/cli/install#--frozen-lockfile).
+[npm clean installation](https://docs.npmjs.com/cli/v11/commands/npm-ci/),
+[development engines](https://docs.npmjs.com/cli/v11/configuring-npm/package-json/#devengines).
 
-For pnpm 12, place non-authentication configuration in `pnpm-workspace.yaml`;
-old `package.json#pnpm` settings are not read and `.npmrc` is for registry/auth
-configuration. Use `allowBuilds` entries for the actual dependency scripts that
-need a decision; the older `onlyBuiltDependencies` family was removed. Keep
-unreviewed builds failing. Recommend `verifyDepsBeforeRun: error` so a check does
-not trigger an implicit install, and `pmOnFail: error` when the documented bootstrap
-already provisions the exact package-manager pin. Those replace assumptions from
-older pnpm examples; verify them with the chosen release and clean CI installation.
-[Configuration migration](https://pnpm.io/migration),
-[build settings](https://pnpm.io/settings/build),
-[package-manager version behavior](https://pnpm.io/settings/cli#pmonfail).
+Keep exact dependency pins, strict peer/engine checks, and explicit approval of
+installation scripts. npm's `allowScripts` field and `strict-allow-scripts`
+setting preserve the esbuild-only script policy, with an explicit denial for
+the optional macOS fsevents build. A one-day `min-release-age`
+window covers new resolutions; the Vite exception matches its package name,
+where pnpm's former exception named one version. Review that exception alongside
+the exact Vite pin when upgrading. These are supported by the evaluated npm
+11.17.0; do not assume older npm versions implement the policy.
+[npm configuration](https://docs.npmjs.com/cli/v11/using-npm/config/#strict-allow-scripts),
+[release-age settings](https://docs.npmjs.com/cli/v11/using-npm/config/#min-release-age).
 
-Do not assume pnpm or a browser binary is already installed on an owner's machine.
-Document prerequisites and one tested bootstrap route per supported platform;
-the current pnpm documentation specifically recommends its npm route on Windows.
-The initial recommendation retained the existing Python checker. The owner
-subsequently chose Node for all deterministic repository tooling; the migrated
-checker and both workflows now use Node, with no Python prerequisite. See
-[the current development guide](../development.md) for commands.
-[pnpm Windows setup](https://pnpm.io/installation#on-windows).
+Node supplies npm; document the tested version and browser prerequisites for
+all supported platforms. The owner also chose Node for all deterministic
+repository tooling; the migrated checker and both workflows have no Python
+prerequisite. See [the current development guide](../development.md) for commands.
 
 Cross-platform scripts should invoke tools directly or small Node scripts. Use
 Node filesystem/path/URL APIs and argument arrays for subprocesses; avoid
 `rm -rf`, Bash-only syntax, inline `NAME=value` assignments, shell glob expansion,
-and hand-built `file:` URLs. npm documents different default shells on POSIX and
-Windows; pnpm also documents that inline environment assignments fail on
-non-POSIX systems unless its optional shell emulator is used. Prefer avoiding
-that dependency on shell emulation initially.
-[npm script execution](https://docs.npmjs.com/cli/v11/using-npm/scripts/#exiting),
-[pnpm shell behavior](https://pnpm.io/cli/run#shellemulator).
+and hand-built `file:` URLs. npm uses different default shells on POSIX and
+Windows, so the maintained task wrapper uses Node process APIs directly.
+[npm script execution](https://docs.npmjs.com/cli/v11/using-npm/scripts/#exiting).
 
 The current checker compares vendored file bytes and requires real symlinks for
 Claude adapters. Git can check symlinks out as text files when `core.symlinks` is

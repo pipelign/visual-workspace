@@ -153,6 +153,39 @@ Set budgets from the intended workflow and retain evidence for regressions. Add
 caches, memoization, and extra parallelism to address an observed need, including
 how invalidation and resource use remain correct.
 
+## Branches and pull requests
+
+Use short-lived `feature/<topic>` branches from current `main` for features,
+fixes, and documentation. Changes reach `main` through a pull request; there is
+no separate development or release branch.
+
+1. Start with a clean working tree and update `main`, then create a branch:
+
+   ```sh
+   git switch main
+   git pull --ff-only
+   git switch -c feature/short-topic
+   ```
+
+2. Commit and push work on that branch. Use the focused local checks appropriate
+   to the change; pushing a branch without a PR does not start CI.
+3. Open a PR targeting `main` when ready for CI and review. Describe the outcome,
+   link the originating spec/ticket when present, and record checks and remaining
+   limits. Apply the independent review policy below to substantive changes.
+4. Resolve findings and wait for the checks on the latest PR revision to pass.
+   Squash-merge the PR into `main`, then delete the merged feature branch.
+
+Both workflows run for PRs targeting `main` when opened, reopened, or updated
+with new commits, including draft PRs. An update cancels superseded runs for the
+same PR. There are no push-triggered runs, including after a merge to `main`.
+The development-quality workflow also permits a manual run from Actions.
+See [GitHub's PR event documentation](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request).
+
+The workflow files configure CI triggers. Enforcing PRs and passing checks as
+merge requirements uses GitHub branch protection or rulesets; those repository
+settings are managed separately. A documented merge policy alone does not block
+a direct push to `main`.
+
 ## Review and compatibility policy
 
 The owner chose these policies on September 24, 2026.

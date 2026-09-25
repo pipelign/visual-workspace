@@ -35,6 +35,9 @@ proposals as proposals until a decision is made.
 
 ## Working loop
 
+Use a short-lived feature branch from `main` and return changes through a PR;
+follow the [branch workflow](docs/engineering.md#branches-and-pull-requests).
+
 1. Establish the observable outcome and the evidence that will demonstrate it.
    Resolve consequential ambiguity; make routine, reversible choices directly.
 2. Search for relevant components, templates, examples, skills, and commands.

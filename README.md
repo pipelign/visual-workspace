@@ -1,52 +1,23 @@
 # visual-workspace
 
-A forkable visual workspace for coding agents. Build diagrams, figures, and
-documents in code, then grow a reusable visual system and authoring practice.
+A visual workspace for creating diagrams, figures, and documents with coding agents.
 
-This repository has a runnable development quality lab and contribution tooling.
-The product studio remains to be built. The [project charter](Project-Charter.md)
-describes the intended authoring loop; [architecture notes](docs/architecture.md) distinguish the studio,
-owner workspace, and starter, including the open app/library packaging question.
+**Under development.**
 
-## Working with an agent
+## Development
 
-Open this repository in Codex or Claude Code. Start with
-[AGENTS.md](AGENTS.md), the canonical project guidance; `CLAUDE.md` imports it.
-Matt Pocock's engineering and productivity skills are included locally, pinned to
-a reviewed upstream revision. See the [skill guide](docs/agents/skills.md) for
-the catalog, invocation, installation details, and update procedure.
-
-Useful starting requests:
-
-- “Help resolve the studio/workspace boundary using `grill-with-docs`.”
-- “Implement this agreed studio capability using `tdd`.”
-- “Review this branch against the spec and our engineering standards.”
-
-Owner work will include requests such as “Create a figure for this project's
-brief using this brand.” Those authoring capabilities still need to be built and
-demonstrated. The included skills support engineering the system.
-
-## Run the development lab
-
-Follow [development setup](docs/development.md) for the pinned Node/npm versions
-and browser prerequisites on Linux/WSL, native Windows, or macOS. Deterministic
-repository tooling runs on Node; no Python installation is required.
-
-After installation:
+Follow the [setup guide](docs/development.md) for installation and prerequisites,
+then start the local development server:
 
 ```sh
-npm run check:env
 npm run dev
 ```
 
-The neutral lab exercises React/Tailwind previews, portable HTML, and browser
-export checks. CI runs the full `npm run check` gate on all three operating systems.
-For local changes, select affected checks using the
-[testing policy](docs/testing.md#select-local-checks); a full local run is optional
-and should answer a concrete concern.
+See [AGENTS.md](AGENTS.md) for contribution guidance and the
+[project charter](Project-Charter.md) for scope.
 
-Read the [engineering standards](docs/engineering.md),
-[testing/evidence policy](docs/testing.md), and the linked
-[stack evaluations](docs/development.md#why-this-stack) before implementing a
-product capability. The lab is an evaluation fixture, not the public authoring
-contract.
+## Attribution
+
+Agent skills come from [Matt Pocock](https://github.com/mattpocock)'s
+[skills repository](https://github.com/mattpocock/skills), used under the
+[MIT license](third_party/mattpocock-skills/LICENSE).

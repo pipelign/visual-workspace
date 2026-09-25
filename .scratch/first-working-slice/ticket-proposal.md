@@ -23,6 +23,22 @@ and output inspection belong to the ticket introducing the behavior; ticket 12
 integrates and delivers the complete example rather than supplying deferred
 coverage for earlier work.
 
+## Quality-lab retirement
+
+The owner agreed that the quality lab is bootstrap scaffolding. Preserve useful
+neutral compositions as example workspace material or test fixtures, and move
+checks onto real public studio behavior as each capability arrives. Remove
+superseded lab implementations, UI, commands, and CI/build wiring in the ticket
+that replaces them. Keep an unreplaced probe only for a named development need,
+with its disposition assigned to a ticket below; equivalent product evidence
+must exist before removing a check that still protects supported behavior.
+
+Ticket 01 takes over preview, portable HTML, and the default development entry.
+Ticket 04 takes over PNG and selected-part export probes. Ticket 06 resolves the
+PDF probe against the actual document capability. Ticket 12 confirms that the
+lab has been retired or that any retained development utility has an explicit,
+continuing purpose. This adds no separate lab application or implementation phase.
+
 ## 01: Find, preview, and export a standalone draft figure
 
 **What to build:** Start a local studio, find one neutral draft figure, compare
@@ -35,10 +51,13 @@ No preceding product ticket.
 **Spec coverage:** Stories 1, 2, 12, 20, 21, 23-25, 41, 44, 46, 48, 50-51;
 acceptance A1-A4, A12, A15-A16 for the standalone case.
 
-- [ ] Select and document a candidate runtime, framework, bundler, package manager,
-  and rendering/export tools against this example. Include locked dependencies,
-  strict static checking, one formatting/linting setup, documented installation,
-  development, test, type-check, lint, and build commands, and clean-checkout CI.
+- [ ] Reuse the evaluated Node/npm toolchain, locked dependencies, static checks,
+  and clean-checkout CI from the development foundation. Update setup and commands
+  for the actual studio; change the evaluated stack only for a demonstrated need.
+- [ ] Make `npm run dev` open the studio. Adapt useful lab compositions into the
+  neutral example workspace through public contracts. Move preview, variation,
+  accessibility, resource-failure, and portable-HTML checks onto studio behavior;
+  retire the replaced lab paths and assign any remaining probe to its ticket.
 - [ ] Save a neutral brief with audience, purpose, message, destinations,
   dimensions, and source provenance. Author one standalone draft with stable
   identity, descriptive discovery metadata, declared dimensions, capabilities,
@@ -157,6 +176,9 @@ delivery, capabilities, export records, and failure handling.
 - [ ] Inspect the full image, both differently configured uses, nested parts, and
   asset exports in both variations. Cover isolation, resource readiness, source
   preservation, and failure cases through real export integration tests.
+- [ ] Repoint the lab's PNG, selected-part, resource-readiness, and applicable
+  visual checks at these public export operations. Preserve useful neutral
+  fixtures and remove the superseded lab export implementation and wiring.
 
 ## 05: Deliver a slide that reuses the shared figure
 
@@ -207,7 +229,9 @@ A16 for the document and its supported formats.
 - [ ] Evaluate document PDF support against authored page geometry. If offered,
   inspect page count, dimensions, text, and figure placement in the actual PDF.
   Otherwise record the capability limitation explicitly; PDF feasibility is not
-  grounds to postpone required HTML delivery.
+  grounds to postpone required HTML delivery. Replace the lab's PDF geometry
+  probe with checks of the real document export if PDF is supported; otherwise
+  retire that isolated probe and retain the explicit capability limitation.
 - [ ] Test Markdown binding, refresh, real rendering/export, and useful malformed
   content/resource diagnostics through public operations. Inspect page structure
   and typography at the declared destination dimensions.
@@ -384,6 +408,11 @@ acceptance A14 and A17, plus a final integrated run of A1-A16.
   Capture useful owner guidance from actual use and verify existing controls'
   keyboard access, focus, loading, and failure states. New automated coverage in
   this ticket targets feedback/resumption and integration behavior introduced here.
+
+- [ ] Confirm each lab-only implementation and entry point has been retired or
+  retained for a named continuing development need. Keep representative fixtures
+  and useful checks against the real studio; remove obsolete build/CI wiring and
+  update setup guidance. Do not keep a parallel lab application by default.
 
 ## Dependency review
 

@@ -7,6 +7,13 @@ The product contracts in the [first-slice spec](../.scratch/first-working-slice/
 still need implementation. Use [engineering standards](engineering.md) for
 contribution decisions and [testing guidance](testing.md) for evidence.
 
+The lab is temporary bootstrap scaffolding. As studio capabilities arrive,
+keep useful neutral fixtures and move their checks onto public studio behavior;
+retire the replaced lab code and wiring. The studio becomes the default
+`npm run dev` entry in ticket 01. The
+[retirement plan](../.scratch/first-working-slice/ticket-proposal.md#quality-lab-retirement)
+assigns the remaining export probes and final cleanup to their product tickets.
+
 ## Supported development targets
 
 Target native Windows 11+, macOS 14+, and Ubuntu 24.04, including Ubuntu under

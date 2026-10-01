@@ -89,8 +89,10 @@ One root context, with decisions recorded when needed. Read
 
 ## Current verification
 
-The executable quality lab establishes the development toolchain; the product
-studio remains to be built. Follow [setup and commands](docs/development.md) and
+The studio supports standalone draft previews and portable HTML through
+[public operations](docs/studio-contract.md), demonstrated in `workspace/`.
+Selected-part PNG and PDF geometry remain development probes. Follow
+[setup and commands](docs/development.md) and
 [testing and evidence requirements](docs/testing.md). Select the smallest useful
 local checks for the change. CI owns the full `npm run check` gate; a full local run
 needs a concrete reason, not a routine end-of-task habit. Once relevant checks

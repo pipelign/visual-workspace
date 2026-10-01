@@ -25,7 +25,8 @@
     "test:report": "playwright show-report artifacts/browser/report",
     "check": "node scripts/tasks.mjs check",
     "check:agents": "node scripts/tasks.mjs agents",
-    "probe:render": "tsx tools/quality-lab/generate.ts"
+    "probe:render": "tsx tools/quality-lab/generate.ts",
+    "studio": "tsx studio/cli.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.13.0",

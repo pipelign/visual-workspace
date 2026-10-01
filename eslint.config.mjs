@@ -15,6 +15,7 @@ export default [
       'artifacts/**',
       'coverage/**',
       'tools/quality-lab/public/**',
+      'studio/public/**',
     ],
   },
   {
@@ -57,14 +58,26 @@ export default [
     rules: reactHooks.configs.recommended.rules,
   },
   {
-    files: ['tools/quality-lab/main.tsx', 'tools/quality-lab/composition.tsx'],
+    files: [
+      'studio/main.tsx',
+      'workspace/**/*.tsx',
+      'tools/quality-lab/composition.tsx',
+    ],
     rules: {
       'no-restricted-imports': [
         'error',
         {
           patterns: [
             {
-              group: ['node:*', './render', './generate', '**/node_modules/**'],
+              group: [
+                'node:*',
+                './render',
+                './generate',
+                '**/node_modules/**',
+                '**/studio/operations*',
+                '**/studio/catalog*',
+              ],
+              allowTypeImports: true,
               message:
                 'Browser compositions receive resolved inputs; keep filesystem and export effects in Node operations.',
             },

@@ -1,0 +1,44 @@
+{
+  "id": "neutral",
+  "roles": {
+    "canvas": { "kind": "color", "description": "Whole figure background." },
+    "surface": { "kind": "color", "description": "Visual node background." },
+    "text": { "kind": "color", "description": "Primary headings and copy." },
+    "muted": { "kind": "color", "description": "Secondary explanatory copy." },
+    "border": { "kind": "color", "description": "Node outlines." },
+    "workflowAccent": {
+      "kind": "color",
+      "description": "Owner-defined accent for workflow context labels."
+    },
+    "bodyFont": { "kind": "font", "description": "Body copy typeface." },
+    "headingFont": { "kind": "font", "description": "Heading typeface." }
+  },
+  "variations": {
+    "light": {
+      "canvas": "#f8fafc",
+      "surface": "#ffffff",
+      "text": "#172338",
+      "muted": "#475569",
+      "border": "#b7c9db",
+      "workflowAccent": "#2160a8",
+      "bodyFont": "inter",
+      "headingFont": "inter"
+    },
+    "dark": {
+      "canvas": "#101827",
+      "surface": "#172338",
+      "text": "#f8fafc",
+      "muted": "#cbd5e1",
+      "border": "#486075",
+      "workflowAccent": "#8bd5ff",
+      "bodyFont": "inter",
+      "headingFont": "inter"
+    }
+  },
+  "fonts": {
+    "inter": {
+      "source": "brands/neutral/inter.woff2",
+      "license": "brands/neutral/FONT-LICENSE.txt"
+    }
+  }
+}

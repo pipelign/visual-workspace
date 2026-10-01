@@ -42,6 +42,6 @@ jobs:
           name: quality-${{ matrix.os }}
           path: |
             artifacts/
-            dist/quality-lab/
+            dist/studio/
           if-no-files-found: ignore
           retention-days: 14

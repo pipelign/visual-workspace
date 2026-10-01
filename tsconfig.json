@@ -20,5 +20,13 @@
     "noEmit": true,
     "allowImportingTsExtensions": true
   },
-  "include": ["tools/**/*.ts", "tools/**/*.tsx", "tests/**/*.ts", "*.config.ts"]
+  "include": [
+    "studio/**/*.ts",
+    "studio/**/*.tsx",
+    "workspace/**/*.tsx",
+    "tools/**/*.ts",
+    "tools/**/*.tsx",
+    "tests/**/*.ts",
+    "*.config.ts"
+  ]
 }

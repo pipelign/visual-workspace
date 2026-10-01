@@ -1,18 +1,14 @@
 # Development environment
 
-The executable code currently provides a **development quality lab**, not the
-studio. It exercises the candidate stack with a neutral React composition,
-isolated light/dark previews, portable HTML, PNG/PDF probes, and test reports.
-The product contracts in the [first-slice spec](../.scratch/first-working-slice/spec.md)
-still need implementation. Use [engineering standards](engineering.md) for
-contribution decisions and [testing guidance](testing.md) for evidence.
+The local studio discovers the neutral workspace, previews standalone drafts in
+isolated brand variations, and exports static single-file HTML. Owner files use
+the [public studio contract](studio-contract.md); later lifecycle, composition,
+and document capabilities remain in the [first-slice plan](../.scratch/first-working-slice/spec.md).
+Use [engineering standards](engineering.md) and [testing guidance](testing.md).
 
-The lab is temporary bootstrap scaffolding. As studio capabilities arrive,
-keep useful neutral fixtures and move their checks onto public studio behavior;
-retire the replaced lab code and wiring. The studio becomes the default
-`npm run dev` entry in ticket 01. The
-[retirement plan](../.scratch/first-working-slice/ticket-proposal.md#quality-lab-retirement)
-assigns the remaining export probes and final cleanup to their product tickets.
+The quality-lab shell and complete-figure path were retired in ticket 01. Only the
+selected Delivery-part PNG and PDF geometry probes remain until tickets 04 and
+06 replace them. They are development evidence, not offered studio formats.
 
 ## Supported development targets
 
@@ -58,11 +54,17 @@ When updating a checkout that previously used pnpm, run `npm ci` once. It
 replaces the old dependency tree using `package-lock.json`; there is no need to
 uninstall a globally installed package manager.
 
-The lab runs on the loopback address printed by Vite. It generates neutral
-artifact documents before starting, and displays them in separate frames. Changes
-to the interactive shell refresh through Vite. After changing the Node-rendered
-fixture, rerun `npm run probe:render` and refresh the frame, or restart `npm run dev`.
-A production authoring watcher is still first-slice work.
+The studio runs at the loopback address printed by Vite. Workspace saves refresh
+lookup, inspection, and previews; **Refresh saved source** requests an explicit
+refresh. The gallery can start with a broken draft, show its repair diagnostics,
+and keep valid metadata inspectable. Owner code stays behind the public contract.
+Use the CLI with the gallery stopped for discovery, inspection, and HTML delivery:
+
+```sh
+npm run studio -- list
+npm run studio -- inspect source-to-delivery
+npm run studio -- export source-to-delivery dark artifacts/exports
+```
 
 ## Commands and outputs
 
@@ -73,14 +75,14 @@ The availability of a full gate does not make it a required local finishing step
 | --- | --- |
 | `npm run check` | Full CI gate: skill check, types, lint, formatting, Vitest, production build, Chromium, and Linux visual comparisons. Run locally only for a concrete broader verification need. |
 | `npm run typecheck`, `npm run lint`, `npm run format:check` | Independent static gates; diagnostics identify their files and rules. |
-| `npm test` / `npm run test:watch` | Node behavior tests, once or in watch mode; pass arguments after `--`, for example `npm test -- tools/quality-lab/render.test.ts`. |
-| `npm run test:browser` | Real Chromium behavior, accessibility, offline delivery, resource readiness, and export geometry. |
+| `npm test` / `npm run test:watch` | Node behavior tests, once or in watch mode; pass arguments after `--`, for example `npm test -- studio/operations.test.ts`. |
+| `npm run test:browser` | Real Chromium studio behavior, accessibility, offline HTML, resource readiness, and retained PNG/PDF probes. |
 | `npm run test:visual` | Reviewed Linux reference images, with updates disabled. |
 | `npm run test:report` | Opens the browser HTML report. Visual reports are separate under `artifacts/visual/report`. |
 | `npm run test:coverage` | Diagnostic coverage report; a percentage is not the acceptance gate. |
-| `npm run build` | Production Vite lab plus generated static artifacts in `dist/quality-lab`. |
+| `npm run build` | Production studio shell and actual HTML deliveries in `dist/studio`; building exercises the real renderer and requires Chromium. |
 | `npm run preview` | Builds and serves that production output locally; browser suites use this path. |
-| `npm run probe:render` | Regenerates the portable HTML fixtures through the actual Node/TSX rendering entry point. |
+| `npm run probe:render` | Regenerates the retained Delivery-part development probe. |
 | `npm run check:agents` | Verifies the pinned skill snapshot, license, metadata, adapters, and guidance using Node built-ins. |
 | `npm run format` | Explicitly formats maintained code/configuration. It excludes vendored skills, generated output, and prose. |
 
@@ -99,7 +101,7 @@ Source image baselines live with the visual tests and receive deliberate review.
 ## Reproducibility and portable commands
 
 - One lockfile and exact direct package pins define the tested dependency set.
-  CI uses frozen installation. Update related tools together and rerun the lab.
+  CI uses frozen installation. Update related tools together and rerun affected rendering/export checks.
   A build/transpilation success does not replace the separate TypeScript check.
 - The evaluation chose TypeScript 6.0.3 because the installed typed-lint package
   supports TypeScript below 6.1; the registry's newer 7.x release did not fit that
@@ -119,7 +121,7 @@ Source image baselines live with the visual tests and receive deliberate review.
 - Tasks invoke Node CLI entry points with argument arrays. They do not require
   Bash, POSIX environment assignment, or launching Windows `.cmd` files from
   Node. File tests include spaces, Unicode, `#`, and `%` in real local paths.
-- The root TypeScript configuration describes the bundled/TSX-loaded lab.
+- The root TypeScript configuration describes the bundled studio and TSX-loaded owner compositions.
   `scripts/tsconfig.json` checks native Node TypeScript with NodeNext resolution
   and erasable syntax; `npm run typecheck` checks both. The checker executes directly
   on the pinned Node without a loader or build. For a checker change, invoke its
@@ -127,13 +129,13 @@ Source image baselines live with the visual tests and receive deliberate review.
   checking them, so CI retains the separate static gate. See
   [Node TypeScript support](https://nodejs.org/docs/latest-v24.x/api/typescript.html).
   A future compiled operation layer must also test its compiled CLI output.
-- Tailwind styles the lab shell. Artifact CSS, semantic values, and fonts are
-  resolved into isolated documents. Future shadcn controls belong in the studio
+- Tailwind styles the studio shell. Artifact CSS, semantic values, and fonts are
+  resolved into isolated documents. shadcn controls belong in the studio
   shell and are added individually when used; no unused component catalog or
   shadcn CLI dependency is installed now.
 - Run WSL tooling and editors against the Linux filesystem where practical.
   Native Windows and WSL share a product target but have different file watching
-  and path behavior. The real authoring watcher still needs atomic-save,
+  and path behavior. The workspace watcher still needs native Windows-editor/WSL evidence for atomic-save,
   rename/delete, and Windows-editor/WSL tests.
 
 ## Why this stack
@@ -149,7 +151,7 @@ ESLint/Prettier, Vitest, Playwright, and axe. Playwright also supplies the brows
 used by the export probes, avoiding another browser automation family.
 unified/remark and Zod are recommendations for later content/contract work, not
 installed dependencies. Exact React/Vite/export public interfaces remain subject
-to the first working slice; the lab is not a library for owner artifacts.
+to the first working slice; the public entrypoint and owner example establish the first standalone contract.
 
 The initial evidence and its limits are retained in
 [the foundation record](../.scratch/development-foundation/status.md).

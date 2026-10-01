@@ -1,8 +1,8 @@
 # Testing and evaluation for agent contributions
 
 Use this with the [engineering guide](engineering.md). Commands and platform
-setup live in [development](development.md); the runnable examples live in the
-quality lab. The standard is an observable result with retained evidence.
+setup live in [development](development.md); the runnable authoring example lives in the
+neutral workspace. The standard is an observable result with retained evidence.
 
 ## Definition of done
 
@@ -42,7 +42,7 @@ suite; agents do not routinely duplicate it locally.
   failures; handing broad coverage to CI does not mean ignoring known failures.
 
 For example, a renderer change can use
-`npm exec -- vitest run tools/quality-lab/render.test.ts`; a browser behavior can
+`npm exec -- vitest run studio/operations.test.ts`; a browser behavior can
 use a relevant file or test-name filter. A documentation edit needs neither.
 `npm run check` remains the complete CI gate, available locally when justified.
 
@@ -62,7 +62,8 @@ These are relevant evidence types, not a checklist to run for every change.
 | Routine scripts or task wrappers | Inspect the change; run the affected command when useful. No dedicated script regression suite. |
 | Prose or simple styling | Diff/link review and applicable visual inspection. No automatic setup check or application suite. |
 
-The lab supplies working examples of several mechanisms. It does not yet
+The studio supplies standalone preview/HTML checks; the retained lab probes cover
+selected-part PNG and PDF geometry until tickets 04/06. This does not yet
 establish product lifecycle preservation, authoring efficiency, collection
 guidance, Markdown repair, or the external presentation handoff.
 
@@ -82,10 +83,10 @@ one legitimate use. Avoid changing compiler options or adding suppressions merel
 to make a contribution pass.
 
 Keep formatting in Prettier and semantic checks in ESLint. Check commands do not
-auto-fix source. Import rules currently keep the fixture's browser compositions
-away from Node effects. When real studio/owner entry points exist, extend scoped
-rules and add an owner example; a static import rule is not a sandbox or a proof
-about arbitrary dynamic imports.
+auto-fix source. Import rules keep owner compositions and the studio's browser
+shell away from Node effects. Extend scoped rules and owner examples as public
+entry points grow; a static import rule is not a sandbox or a proof about
+arbitrary dynamic imports.
 
 ## Behavioral test discipline
 
@@ -117,9 +118,9 @@ about arbitrary dynamic imports.
 
 ## Browser and export evidence
 
-Browser suites build the lab and serve the production output, exercising bundled
+Browser suites build the studio and serve the production output, exercising bundled
 assets as well as interaction. The Node renderer runs in its real TSX-aware process. Browser tests inspect its
-generated delivery rather than recompiling server TSX inside the test runner.
+generated public delivery rather than recompiling server TSX inside the test runner.
 This matters with the pinned Playwright release: its JSX runtime produces mounting
 descriptors, which React's server renderer cannot consume. The probe encountered
 that failure; using the real Node output preserves the correct execution boundary.
@@ -134,9 +135,9 @@ resource-completeness contracts.
 Use a fresh offline context for portable files, with artifact JavaScript disabled
 for the static contract. Record unexpected network requests, console/page errors,
 and actual file geometry. Test URL conversion with spaces, Unicode, and reserved
-characters. The lab's file opening succeeds independently of HTTP; its test web
-server remains available for separate UI tests. The production acceptance still
-requires an explicit studio-stopped exercise.
+characters. Studio delivery checks open copied HTML independently of HTTP; the
+test web server remains available for separate UI checks. Affected portable
+delivery changes also require an explicit studio-stopped exercise.
 
 A PNG header/dimensions check proves geometry only. Inspect the resulting image
 and compare reviewed representative output. A parsed PDF page count/media box

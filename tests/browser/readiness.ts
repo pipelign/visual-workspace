@@ -17,3 +17,24 @@ export async function requireFixtureReady(page: Page) {
     await Promise.all([...document.images].map((image) => image.decode()));
   });
 }
+
+export async function requireArtifactReady(page: Page) {
+  await page.evaluate(async () => {
+    const faces = [...document.fonts].filter((font) =>
+      font.family.includes('StudioFont'),
+    );
+    if (!faces.length)
+      throw new Error('Required Studio Font was not declared.');
+    for (const face of faces) {
+      try {
+        await face.load();
+      } catch {
+        throw new Error('Required Studio Font did not load.');
+      }
+      if (face.status !== 'loaded')
+        throw new Error('Required Studio Font did not load.');
+    }
+    await document.fonts.ready;
+    await Promise.all([...document.images].map((image) => image.decode()));
+  });
+}

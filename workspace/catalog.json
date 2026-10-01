@@ -1,0 +1,30 @@
+{
+  "artifacts": [
+    {
+      "id": "source-to-delivery",
+      "title": "From source to delivery",
+      "description": "A standalone figure showing the editable-source-to-portable-delivery loop.",
+      "category": "figure",
+      "tags": ["authoring", "portable-html", "workflow"],
+      "usage": "Intended as a slide-sized explanation of the authoring loop; no composition consumers yet.",
+      "lifecycle": "draft",
+      "project": "projects/source-to-delivery/project.md",
+      "brief": "projects/source-to-delivery/brief.md",
+      "brand": "brands/neutral/brand.json",
+      "source": "projects/source-to-delivery/figure.tsx",
+      "dimensions": { "width": 640, "height": 360 },
+      "capabilities": ["html"],
+      "tokens": [
+        "canvas",
+        "surface",
+        "text",
+        "muted",
+        "border",
+        "workflowAccent",
+        "bodyFont",
+        "headingFont"
+      ],
+      "assets": { "mark": "projects/source-to-delivery/assets/mark.svg" }
+    }
+  ]
+}

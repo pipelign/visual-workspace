@@ -30,7 +30,7 @@ gate or external presentation import is claimed.
 Independent Standards and Spec reviews cleared the final changes. Review findings
 about metadata/source races and missing-workspace diagnostics were fixed with
 regressions. Actual typography inspection found and fixed invalid generated CSS
-font identifiers. See [the review record](.scratch/first-working-slice/ticket-01-review.md).
+font identifiers. See [the review record](ticket-01-review.md).
 
 The public contract currently covers standalone drafts with HTML only. Lifecycle
 capture and runtime workspace-module dependencies begin in ticket 02. Platform

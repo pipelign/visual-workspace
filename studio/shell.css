@@ -1,0 +1,102 @@
+@import 'tailwindcss' source('.');
+:root {
+  font-family: system-ui, sans-serif;
+  color: #172338;
+  background: #f1f5f9;
+}
+.studio {
+  padding: 32px;
+}
+header {
+  max-width: 760px;
+  margin-bottom: 24px;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 650;
+  margin: 8px 0;
+}
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 24px 0 6px;
+}
+h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: capitalize;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 13px;
+  color: #475569;
+}
+.toolbar,
+.previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: start;
+}
+.toolbar {
+  align-items: end;
+}
+.field {
+  display: grid;
+  gap: 6px;
+}
+button,
+select {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #64748b;
+  background: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+button {
+  background: #172338;
+  color: white;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+:focus-visible {
+  outline: 3px solid #2160a8;
+  outline-offset: 4px;
+}
+.metadata {
+  color: #475569;
+  margin: 12px 0 24px;
+}
+.preview-card {
+  max-width: 100%;
+}
+.preview-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-bottom: 12px;
+}
+iframe {
+  display: block;
+  border: 0;
+}
+[role='alert'] {
+  max-width: 640px;
+  padding: 12px;
+  margin: 12px 0;
+  border-left: 3px solid #b91c1c;
+  background: #fee2e2;
+}
+[role='status'] {
+  margin-top: 8px;
+  font-size: 14px;
+}
+@media (max-width: 700px) {
+  .studio {
+    padding: 16px;
+  }
+}

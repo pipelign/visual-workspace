@@ -1,12 +1,12 @@
 # Proposed ticket breakdown: first working slice
 
-Review state: accepted as a starting point; publication deferred while the
-development foundation is established.
+Review state: accepted as a starting point. [Ticket 01](issues/01-standalone-figure.md)
+is published and implemented on its feature branch; remaining tickets are drafts.
 
 This is a proposal for 12 tickets against the [first working-slice spec](spec.md).
 The spec remains unchanged. After approval, publish each ticket separately with
 the local tracker status `ready-for-agent`; execution starts only after its
-listed blockers are done. These drafts are not published implementation tickets.
+listed blockers are done. Except for ticket 01, these drafts are not published implementation tickets.
 
 Each ticket delivers observable behavior through the public studio operations,
 with the smallest relevant browser controls, behavioral tests, and inspection of

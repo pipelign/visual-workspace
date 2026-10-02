@@ -30,6 +30,7 @@ function typecheck() {
   tool('typescript', ['--project', 'scripts/tsconfig.json']);
 }
 function generate() {
+  tool('tsx', ['studio/generate.ts']);
   tool('tsx', ['tools/quality-lab/generate.ts']);
 }
 function build() {
@@ -78,7 +79,7 @@ switch (task) {
     break;
   }
   case 'dev':
-    generate();
+    tool('tsx', ['tools/quality-lab/generate.ts']);
     tool('vite', []);
     break;
   case 'build':

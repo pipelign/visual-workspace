@@ -147,3 +147,5 @@ artifacts/
 tools/quality-lab/public/
 test-results/
 playwright-report/
+
+studio/public/

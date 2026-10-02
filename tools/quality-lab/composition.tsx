@@ -1,5 +1,4 @@
 export type Variation = 'light' | 'dark';
-export type Target = 'figure' | 'delivery';
 
 const palettes = {
   light: {
@@ -66,78 +65,23 @@ function NodePart({
   );
 }
 
-/** Neutral tooling fixture, not a public studio composition contract. */
-export function Composition({
-  variation,
-  target,
-  imageUrl,
-}: {
-  variation: Variation;
-  target: Target;
-  imageUrl: string;
-}) {
-  const colors = palettes[variation];
-  const delivery = (
-    <NodePart
-      title="Delivery"
-      detail="A portable, inspectable result."
-      variation={variation}
-    />
-  );
-  if (target === 'delivery')
-    return (
-      <main
-        className="fixture"
-        aria-label="Delivery part"
-        style={{ width: 264, height: 128, background: colors.canvas }}
-      >
-        {delivery}
-      </main>
-    );
+/** Retained part-export probe until ticket 04; not a studio capability. */
+export function Composition({ variation }: { variation: Variation }) {
   return (
     <main
       className="fixture"
+      aria-label="Delivery part"
       style={{
-        width: 640,
-        height: 360,
-        padding: 40,
-        background: colors.canvas,
-        color: colors.text,
+        width: 264,
+        height: 128,
+        background: palettes[variation].canvas,
       }}
     >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 10,
-          color: colors.accent,
-          fontSize: 13,
-        }}
-      >
-        <img src={imageUrl} width={20} height={20} alt="Fixed blue circle" />
-        <span>VISUAL WORKSPACE / QUALITY FIXTURE</span>
-      </div>
-      <h1
-        style={{
-          margin: '22px 0 8px',
-          fontSize: 32,
-          fontWeight: 400,
-          letterSpacing: '-1px',
-        }}
-      >
-        From source to delivery
-      </h1>
-      <p style={{ margin: '0 0 26px', fontSize: 16, color: colors.muted }}>
-        One composition. Two independently resolved variations.
-      </p>
-      <div style={{ display: 'flex', gap: 32, alignItems: 'center' }}>
-        <NodePart
-          title="Source"
-          detail="Editable content and visual intent."
-          variation={variation}
-        />
-        {delivery}
-      </div>
+      <NodePart
+        title="Delivery"
+        detail="A portable, inspectable result."
+        variation={variation}
+      />
     </main>
   );
 }

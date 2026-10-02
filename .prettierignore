@@ -8,6 +8,7 @@ dist/
 artifacts/
 coverage/
 tools/quality-lab/public/
+studio/public/
 package-lock.json
 # Prose follows the repository writing guidance; keep code formatting separate.
 **/*.md
